@@ -10,7 +10,7 @@
             <p>{{post.description}}</p>
         </div>
         <div>
-            {% if user == post.author %}
+            {% if user == post.author or perms.auth.delete_post %}
                 <form method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Delete</button>

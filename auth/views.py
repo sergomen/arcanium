@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import RegisterForm, PostForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
 from .models import Post
 
@@ -12,12 +12,13 @@ def home(request):
     if request.method == "POST":
         post_id = request.POST.get("post-id")
         post = Post.objects.filter(id=post_id).first()
-        if post and post.author == request.user:
+        if post and (post.author == request.user or request.user.has_perm("auth.delete_post")):
             post.delete()
 
     return render(request, 'auth/home.html', {"posts": posts})
 
 @login_required(login_url="/login")
+@permission_required("auth.add_post", login_url="/login", raise_exception=True)
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
