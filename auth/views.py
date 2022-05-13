@@ -26,7 +26,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect("/home")
+            return redirect("/")
     else:
         form = PostForm()
     return render(request, 'auth/create_post.html', {"form": form})
@@ -37,7 +37,7 @@ def sign_up(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/home')
+            return redirect('/')
     else:
         form = RegisterForm()
 
