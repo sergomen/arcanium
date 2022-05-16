@@ -21,10 +21,12 @@ on_delete=models.CASCADE)
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
+    class Meta:
+        ordering = ['-published_date']
+
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
-    # author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="author_post", on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
