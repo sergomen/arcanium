@@ -32,7 +32,7 @@ def get_secret(setting, secrets=secrets):
     except KeyError:
         raise ImproperlyConfigured("Set the {} setting".format(setting))
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret('SECRET-KEY')
+SECRET_KEY = 'django-insecure--uea@q&+v)#n&k7r8nrzvexns1^wwcu%&@!&x^inbd9(e2@c-w' #get_secret('SECRET-KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -103,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd7mjph2vco40v9',
         'USER': 'wwladqyxgxrrqj',
-        'PASSWORD': get_secret('DB_PASSWORD'),
+        'PASSWORD': '104ef63a99f5eb6eb5ba4603cf5139307e6a5f36b4e71e330aca8a0ca3c7e835' #get_secret('DB_PASSWORD'),
         'HOST': 'ec2-34-194-73-236.compute-1.amazonaws.com',
         'PORT': '5432',
     }
