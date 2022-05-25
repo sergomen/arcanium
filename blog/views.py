@@ -7,7 +7,7 @@ from .forms import PostForm, CommentForm
 
 # Create your views here.
 @login_required(login_url="/login")
-def post_list(request):
+def news_post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
@@ -34,7 +34,7 @@ def news_post_draft_list(request):
 def news_post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
-    return redirect('post_detail', pk=pk)
+    return redirect('news_post_detail', pk=pk)
 
 @login_required(login_url="/login")
 @permission_required("blog.news_post_new", login_url="/login")
@@ -46,7 +46,7 @@ def news_post_new(request):
             post.author = request.user
             # post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('news_post_detail', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -60,7 +60,7 @@ def news_post_edit(request, pk):
             post.author = request.user
             # post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('news_post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -68,7 +68,7 @@ def news_post_edit(request, pk):
 def news_post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
-    return redirect('post_list')
+    return redirect('news_post_list')
 
 def news_add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)

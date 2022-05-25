@@ -28,7 +28,7 @@
                     <a class="btn btn-default pull-right" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span>
                     </a>
                 {% endif %}
-                <button class="btn btn-sm btn-primary pull-right" type="button" data-toggle="collapse" data-target="#replyBox{{comment.pk}}" aria-expanded="false" aria-controls="replyBox{{comment.pk}}">
+                <button class="btn btn-sm btn-primary pull-right" type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.pk}}" aria-expanded="false" aria-controls="replyBox{{comment.pk}}">
                     Reply
                 </button>
                 
