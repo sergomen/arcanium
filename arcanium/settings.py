@@ -35,7 +35,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = 'django-insecure--uea@q&+v)#n&k7r8nrzvexns1^wwcu%&@!&x^inbd9(e2@c-w' #get_secret('SECRET-KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['arcanium.herokuapp.com',
                  '127.0.0.1']
