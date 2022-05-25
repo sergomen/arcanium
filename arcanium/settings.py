@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'arcanium.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'test': {
+    'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
@@ -108,7 +108,7 @@ DATABASES = {
         'HOST': 'ec2-34-194-73-236.compute-1.amazonaws.com',
         'PORT': '5432',
     },
-    'default': {
+    'test': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbtest',
         'USER': 'postgres',
