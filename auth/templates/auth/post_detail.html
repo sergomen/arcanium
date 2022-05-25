@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'auth/base.html' %}
 {% load poll_extras %}
 {% block content %}
 
@@ -8,38 +8,40 @@
                 {{ post.published_date }}
             </div>
         {% else %}
-        <a class="btn btn-default" href="{% url 'news_post_publish' pk=post.pk %}">Publish</a>
+        <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
         {% endif %}
         {% if post.author == request_user %}
-        <a class="btn btn-default" href="{% url 'news_post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        <a class="btn btn-default" href="{% url 'news_post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove">Remove</span></a>
         {% endif %}
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p>{{ post.description|linebreaksbr }}</p>
     </div>
-    
+
+
     <hr>
-    <a class="btn btn-default" href="{% url 'news_add_comment_to_post' pk=post.pk %}">Add comment</a>
+    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
     {% for comment in post.comments.all %}
         {% if comment not in replies %}
             <div class="comment">
                 {% if request.user|has_group:"mod" %}
-                    <a class="btn btn-default pull-right" href="{% url 'news_comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span>
+                    <a class="btn btn-default pull-right" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span>
                     </a>
                 {% endif %}
                 <button class="btn btn-sm btn-primary pull-right" type="button" data-toggle="collapse" data-target="#replyBox{{comment.pk}}" aria-expanded="false" aria-controls="replyBox{{comment.pk}}">
                     Reply
-            </button>
+                </button>
+                
                 <div class="date">{{ comment.created_date }}</div>
                 <strong>{{ comment.author }}</strong>
                 <p>{{ comment.text|linebreaks }}</p>
             </div>
         
             
-            {% endif %}
+        {% endif %}
             <div class="collapse" id="replyBox{{comment.pk}}">
                 <div class="card card-body m-2">
-                    <form action="{% url 'news_add_reply_to_comment' pk=post.pk %}" method="post">
+                    <form action="add_reply_to_comment" method="post">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="comment">Post a reply</label>
@@ -64,4 +66,5 @@
         <p>No comments here yet :(</p>
     {% endfor %}
     
+
 {% endblock %}

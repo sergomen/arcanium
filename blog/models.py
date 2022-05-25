@@ -30,10 +30,11 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
+    parent = models.ForeignKey("self", null=True, blank=True, related_name='replies', on_delete=models.DO_NOTHING)
 
     def approve(self):
         self.approved_comment = True
         self.save()
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.text, self.author)
+        return '{} by {} at {}'.format(self.text, self.author, self.created_date)

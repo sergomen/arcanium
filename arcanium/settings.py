@@ -35,7 +35,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = 'django-insecure--uea@q&+v)#n&k7r8nrzvexns1^wwcu%&@!&x^inbd9(e2@c-w' #get_secret('SECRET-KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['arcanium.herokuapp.com',
                  '127.0.0.1']
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    # 'auth',
     'auth.apps.AuthConfig',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -97,7 +98,7 @@ WSGI_APPLICATION = 'arcanium.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'test': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
@@ -105,6 +106,14 @@ DATABASES = {
         'USER': 'wwladqyxgxrrqj',
         'PASSWORD': '104ef63a99f5eb6eb5ba4603cf5139307e6a5f36b4e71e330aca8a0ca3c7e835', #get_secret('DB_PASSWORD'),
         'HOST': 'ec2-34-194-73-236.compute-1.amazonaws.com',
+        'PORT': '5432',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbtest',
+        'USER': 'postgres',
+        'PASSWORD': get_secret('DB_PASSWORD_TEST'),
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
