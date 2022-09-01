@@ -11,11 +11,11 @@ services:
     envVars:
       - key: DISABLE_COLLECTSTATIC # Imported from Heroku app
         value: 1
-      # - key: DATABASE_URL # Render PostgreSQL database
-      #   fromDatabase:
-      #     name: postgresql-sinuous-39693
-      #     property: connectionString
+      - key: DATABASE_URL # Render PostgreSQL database
+        fromDatabase:
+          name: postgresql-sinuous-39693
+          property: connectionString
 
 databases: # Render PostgreSQL database
-  # - name: postgresql-sinuous-39693
-  #   ipAllowList: [] # only allow internal connections
+  - name: postgresql-sinuous-39693
+    ipAllowList: [] # only allow internal connections
