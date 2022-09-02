@@ -38,6 +38,7 @@ SECRET_KEY = 'django-insecure--uea@q&+v)#n&k7r8nrzvexns1^wwcu%&@!&x^inbd9(e2@c-w
 DEBUG = True
 
 ALLOWED_HOSTS = ['arcanium.herokuapp.com',
+                 'arcanium.onrender.com',
                  '127.0.0.1']
 
 
