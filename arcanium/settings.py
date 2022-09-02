@@ -16,6 +16,7 @@ import dj_database_url
 import json
 from django.core.exceptions import ImproperlyConfigured
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,13 +36,15 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = 'django-insecure--uea@q&+v)#n&k7r8nrzvexns1^wwcu%&@!&x^inbd9(e2@c-w' #get_secret('SECRET-KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['arcanium.herokuapp.com',
-                 'arcanium.onrender.com',
-                 '127.0.0.1']
+ALLOWED_HOSTS = [
+                 '127.0.0.1'] #'arcanium.herokuapp.com',
+                               #'arcanium.onrender.com',
 
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 INSTALLED_APPS = [
@@ -99,7 +102,12 @@ WSGI_APPLICATION = 'arcanium.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    ),
+    'default2': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
