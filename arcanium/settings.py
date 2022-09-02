@@ -102,10 +102,10 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7mjph2vco40v9',
-        'USER': 'wwladqyxgxrrqj',
-        'PASSWORD': '104ef63a99f5eb6eb5ba4603cf5139307e6a5f36b4e71e330aca8a0ca3c7e835', #get_secret('DB_PASSWORD'),
-        'HOST': 'ec2-34-194-73-236.compute-1.amazonaws.com',
+        'NAME': 'first_db_akl1', #d7mjph2vco40v9
+        'USER': 'first_db_akl1_user', #wwladqyxgxrrqj
+        'PASSWORD': 'Wn8YPMtAZE0qOVLn2lu2Kc6Oo7Ioj2L3', #104ef63a99f5eb6eb5ba4603cf5139307e6a5f36b4e71e330aca8a0ca3c7e835 #get_secret('DB_PASSWORD'),
+        'HOST': 'dpg-cc8eibpgp3jo5oojiusg-a', #ec2-34-194-73-236.compute-1.amazonaws.com
         'PORT': '5432',
     },
     'test': {
